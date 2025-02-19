@@ -8,7 +8,7 @@ const nodemailer = require('nodemailer');
 const generateUniqueCode = (storeName) => {
     const namePart = storeName.replace(/\s+/g, '').substring(0, 3).toUpperCase();
     const randomDigits = Math.floor(1000 + Math.random() * 9000);
-    return `${namePart}${randomDigits}`;
+    return `${namePart}-${randomDigits}`;
 };
 
 // Helper to send email
@@ -89,30 +89,30 @@ exports.login = async (req, res) => {
     const { email, password, uniqueCode } = req.body;
 
     try {
-        console.log("Login request received:", req.body);
+        // console.log("Login request received:", req.body);
 
         const store = await Store.findOne({ email });
         if (!store) {
-            console.log("Store not found for email:", email);
+            // console.log("Store not found for email:", email);
             return res.status(400).json({ message: 'Invalid email' });
         }
 
-        console.log("Store found:", store);
+        // console.log("Store found:", store);
 
         // Check if comparePassword method exists
         if (!store.comparePassword) {
-            console.error("Error: comparePassword method is missing from store model.");
+            // console.error("Error: comparePassword method is missing from store model.");
             return res.status(500).json({ message: 'Server error: comparePassword method missing' });
         }
 
         const isMatch = await store.comparePassword(password);
         if (!isMatch) {
-            console.log("Invalid password for store:", email);
+            // console.log("Invalid password for store:", email);
             return res.status(400).json({ message: 'Invalid password' });
         }
 
         if (store.uniqueCode !== uniqueCode) {
-            console.log("Invalid unique code for store:", email);
+            // console.log("Invalid unique code for store:", email);
             return res.status(400).json({ message: 'Invalid unique code' });
         }
 
@@ -123,7 +123,7 @@ exports.login = async (req, res) => {
             store: { name: store.name, email: store.email },
         });
     } catch (err) {
-        console.error("Login error:", err);
+        // console.error("Login error:", err);
         res.status(500).json({ message: 'Server error', error: err.message });
     }
 };

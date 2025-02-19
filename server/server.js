@@ -3,7 +3,9 @@ const bodyParser = require('body-parser'); // Importing body-parser
 const mongoose = require('mongoose'); // Importing mongoose
 const cors = require('cors'); // Importing cors
 const { createServer } = require('http'); // Importing http
-const authRoutes = require('./routes/auth'); // Import the auth routes
+const cloudinary = require('cloudinary').v2; // Importing cloudinary
+const authRoutes = require('./routes/auth'); // Import the auth route
+const resourceRoutes = require('./routes/resource'); // Import the resource route
 
 
 // Configurations
@@ -19,7 +21,26 @@ app.use(express.json());
 
 
 // Routes
-app.use('/api/auth', authRoutes); // Use the auth routes
+app.use('/api/auth', authRoutes); // Use the auth route
+app.use('/api/resource', resourceRoutes); // Use the resource route
+
+
+// Cloudinary configuration
+cloudinary.config({
+    cloud_name: 'sambit-mondal', // Cloud name
+    api_key: process.env.CLOUDINARY_API_KEY, // API key
+    api_secret: process.env.CLOUDINARY_API_SECRET, // API secret
+});
+
+app.post('/api/cloudinary-signature', (req, res) => {
+    const timestamp = Math.round(new Date().getTime() / 1000); // Current timestamp
+    const signature = cloudinary.utils.api_sign_request(
+        { timestamp, upload_preset: 'cn-hackathon' },
+        process.env.CLOUDINARY_API_SECRET
+    );
+
+    res.json({ timestamp, signature });
+});
 
 
 // DB Connection
