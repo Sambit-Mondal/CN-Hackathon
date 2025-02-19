@@ -2,7 +2,7 @@
   "name": "cn-hackathon",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "concurrently \"npm start --prefix server\" \"npm run dev --prefix client\"",
     "test": "echo \"Error: no test specified\" && exit 1"

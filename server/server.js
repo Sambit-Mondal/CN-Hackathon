@@ -1,24 +1,25 @@
-import express from 'express'; // Importing express
-import bodyParser from 'body-parser'; // Importing body-parser
-import mongoose from 'mongoose'; // Importing mongoose
-import cors from 'cors'; // Importing cors
-import dotenv from 'dotenv'; // Importing dotenv
-import axios from 'axios'; // Importing axios
-import { createServer } from 'http'; // Importing http
+const express = require('express'); // Importing express
+const bodyParser = require('body-parser'); // Importing body-parser
+const mongoose = require('mongoose'); // Importing mongoose
+const cors = require('cors'); // Importing cors
+const { createServer } = require('http'); // Importing http
+const authRoutes = require('./routes/auth'); // Import the auth routes
+
 
 // Configurations
+require('dotenv').config();
 const app = express();
 const httpServer = createServer(app);
-dotenv.config();
 
 
 // Middlewares
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
+app.use(bodyParser.json());
+app.use(express.json());
 
 
 // Routes
+app.use('/api/auth', authRoutes); // Use the auth routes
 
 
 // DB Connection
