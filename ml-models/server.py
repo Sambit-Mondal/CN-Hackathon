@@ -41,5 +41,17 @@ def chat():
         print(f"Error: {e}")
         return jsonify({"error": "Internal server error"}), 500
 
+
+@app.route('/inventory', methods=['GET'])
+def get_inventory():
+    """Fetch inventory data from MongoDB and return JSON."""
+    try:
+        inventory_data = list(inventory_collection.find({}, {"_id": 0}))  # Exclude MongoDB _id
+        return jsonify(inventory_data)
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": "Internal server error"}), 500
+
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
