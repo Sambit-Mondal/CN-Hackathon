@@ -3,6 +3,7 @@ import streamlit as st
 import plotly.express as px
 
 import inventory
+import mail_alerts
 
 def main():
     st.title("Smart Inventory Management Dashboard")
@@ -10,8 +11,7 @@ def main():
     # Sidebar for threshold settings and email for notifications (moved to top)
     st.sidebar.header("Settings")
     low_stock_threshold = st.sidebar.number_input("Low Stock Threshold", value=50)
-    excess_stock_threshold = st.sidebar.number_input("Excess Stock Threshold", value=500) 
-    user_email = st.sidebar.text_input("Your Email for Notifications")
+    excess_stock_threshold = st.sidebar.number_input("Excess Stock Threshold", value=100) 
     
     # Load inventory data from MongoDB Atlas
     df = inventory.load_inventory_data()
@@ -57,6 +57,30 @@ def main():
         low_stock_items = df[df['quantity'] < low_stock_threshold]
         excess_stock_items = df[df['quantity'] > excess_stock_threshold]
         
+        # Automatically send email alerts for low stock items
+        if not low_stock_items.empty:
+            for _, row in low_stock_items.iterrows():
+                store_email = row.get("storeEmail")
+                if store_email:
+                    subject = f"Low Stock Alert: {row['title']}"
+                    body = (f"Dear Store,\n\nThe product '{row['title']}' has a current stock of {row['quantity']}, "
+                            f"which is below the low stock threshold of {low_stock_threshold}.\nPlease restock at the earliest.")
+                    result = mail_alerts.send_email_notification(subject, body, store_email)
+                    if result:
+                        st.info(f"Notification sent to {store_email} for low stock item {row['title']}.")
+                    else:
+                        st.error(f"Failed to send notification to {store_email} for {row['title']}.")
+        
+        # Automatically send email alerts for excess stock items
+        if not excess_stock_items.empty:
+            for _, row in excess_stock_items.iterrows():
+                store_email = row.get("storeEmail")
+                if store_email:
+                    subject = f"Excess Stock Alert: {row['title']}"
+                    body = (f"Dear Store,\n\nThe product '{row['title']}' has a current stock of {row['quantity']}, "
+                            f"which is above the excess stock threshold of {excess_stock_threshold}.\nConsider promotional actions.")
+                    mail_alerts.send_email_notification(subject, body, store_email)
+        
         st.subheader("Low Stock Items")
         if not low_stock_items.empty:
             st.dataframe(low_stock_items)
@@ -68,8 +92,6 @@ def main():
             st.dataframe(excess_stock_items)
         else:
             st.info("No items above threshold.")
-            
-
     
 if __name__ == "__main__":
     main()
