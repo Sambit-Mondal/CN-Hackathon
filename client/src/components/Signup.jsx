@@ -2,6 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 
 const Signup = ({ setLogin }) => {
     const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ const Signup = ({ setLogin }) => {
         password: "",
         confirmPassword: "",
     });
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = (e) => {
         setFormData({
@@ -58,12 +60,12 @@ const Signup = ({ setLogin }) => {
         <form className="w-full h-full p-2 mb-2" onSubmit={handleSubmit}>
             <div className="w-full flex flex-col gap-4 overflow-hidden">
                 <div className="flex flex-col gap-1">
-                    <label className="text-white font-bold">Name</label>
+                    <label className="text-white font-bold">Store Name</label>
                     <input
                         type="text"
                         name="name"
-                        placeholder="Full Name"
-                        className="w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
+                        placeholder="Store Name"
+                        className="text-white w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
                         value={formData.name}
                         onChange={handleChange}
                         required
@@ -75,7 +77,7 @@ const Signup = ({ setLogin }) => {
                         type="email"
                         name="email"
                         placeholder="Email"
-                        className="w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
+                        className="text-white w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
                         value={formData.email}
                         onChange={handleChange}
                         required
@@ -87,7 +89,7 @@ const Signup = ({ setLogin }) => {
                         type="text"
                         name="contactNumber"
                         placeholder="Contact Number"
-                        className="w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
+                        className="text-white w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
                         value={formData.contactNumber}
                         onChange={handleChange}
                         required
@@ -99,7 +101,7 @@ const Signup = ({ setLogin }) => {
                         type="text"
                         name="address"
                         placeholder="Address"
-                        className="w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
+                        className="text-white w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
                         value={formData.address}
                         onChange={handleChange}
                         required
@@ -107,15 +109,28 @@ const Signup = ({ setLogin }) => {
                 </div>
                 <div className="flex flex-col gap-1">
                     <label className="text-white font-bold">Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        className="w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
+                    <div className="relative">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            name="password"
+                            placeholder="Password"
+                            className="w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                        {showPassword ? (
+                            <EyeSlashIcon
+                                className="absolute right-2 top-2.5 w-6 h-6 text-white cursor-pointer"
+                                onClick={() => setShowPassword(false)}
+                            />
+                        ) : (
+                            <EyeIcon
+                                className="absolute right-2 top-2.5 w-6 h-6 text-white cursor-pointer"
+                                onClick={() => setShowPassword(true)}
+                            />
+                        )}
+                    </div>
                 </div>
                 <div className="flex flex-col gap-1">
                     <label className="text-white font-bold">Confirm Password</label>
@@ -123,7 +138,7 @@ const Signup = ({ setLogin }) => {
                         type="password"
                         name="confirmPassword"
                         placeholder="Confirm Password"
-                        className="w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
+                        className="text-white w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
                         value={formData.confirmPassword}
                         onChange={handleChange}
                         required

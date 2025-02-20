@@ -10,19 +10,21 @@ const Dashboard = () => {
     const [inventory, setInventory] = useState([]);
     const [lowThreshold, setLowThreshold] = useState(50);
     const [excessThreshold, setExcessThreshold] = useState(500);
+    const storeEmail = localStorage.getItem("storeEmail");
 
     useEffect(() => {
-        fetchInventoryData();
-    }, []);
+        const fetchInventoryData = async () => {
+            try {
+                const response = await axios.get(`http://127.0.0.1:5000/inventory?storeEmail=${storeEmail}`);
+                setInventory(response.data);
+            } catch (error) {
+                console.error("Error fetching inventory data:", error);
+            }
+        };
 
-    const fetchInventoryData = async () => {
-        try {
-            const response = await axios.get("http://127.0.0.1:5000/inventory");
-            setInventory(response.data);
-        } catch (error) {
-            console.error("Error fetching inventory data:", error);
-        }
-    };
+        fetchInventoryData();
+    }, [storeEmail]);
+    
 
     // Separate inventory based on stock levels
     const lowStock = inventory.filter(item => item.quantity < lowThreshold);
@@ -109,25 +111,22 @@ const Dashboard = () => {
             {/* Analytics Section */}
             <div className="text-white">
                 {inventory.length > 0 ? (
-                    // <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <div className="flex flex-col w-full items-center gap-3">
                         {/* Bar Chart */}
                         <div className="bg-mlsa-dark w-full p-4 rounded-md shadow-md border-2 border-mlsa-sky-blue">
                             <h3 className="text-lg font-bold mb-2">Item Quantities</h3>
                             <Bar data={barData} options={barOptions} />
                         </div>
-                        <div className="w-full items-center justify-center flex gap-2">
-                            {/* Line Chart */}
-                            <div className="bg-mlsa-dark w-full p-4 rounded-md shadow-md border-2 border-mlsa-sky-blue">
-                                <h3 className="text-lg font-bold mb-2">Stock Trends</h3>
-                                <Line data={lineData} options={barOptions} />
-                            </div>
+                        {/* Line Chart */}
+                        <div className="bg-mlsa-dark w-full p-4 rounded-md shadow-md border-2 border-mlsa-sky-blue">
+                            <h3 className="text-lg font-bold mb-2">Stock Trends</h3>
+                            <Line data={lineData} options={barOptions} />
+                        </div>
 
-                            {/* Pie Chart */}
-                            <div className="bg-mlsa-dark w-full h-64 flex items-start justify-center p-4 rounded-md shadow-md border-2 border-mlsa-sky-blue">
-                                <h3 className="text-lg font-bold mb-2">Stock Distribution</h3>
-                                <Pie data={pieData} options={barOptions} />
-                            </div>
+                        {/* Pie Chart */}
+                        <div className="bg-mlsa-dark w-full p-4 rounded-md shadow-md border-2 border-mlsa-sky-blue">
+                            <h3 className="text-lg font-bold mb-2">Stock Distribution</h3>
+                            <Pie data={pieData} options={barOptions} />
                         </div>
                     </div>
                 ) : (

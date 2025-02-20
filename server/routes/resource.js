@@ -59,7 +59,7 @@ router.get('/all', async (req, res) => {
         const resources = await Resource.find();
         res.status(200).json(resources);
     } catch (err) {
-        console.error('Failed to fetch resources:', err);
+        // console.error('Failed to fetch resources:', err);
         res.status(500).json({ error: 'Failed to fetch resources' });
     }
 });

@@ -40,7 +40,7 @@ const ResourceTradingModal = ({ resource, closeModal }) => {
                         />
                         <h2 className="text-xl font-bold">{resource.title}</h2>
                         <p className="text-sm italic text-gray-400">Product ID: {resource.uniqueCode}</p>
-                        <p>Price: <span className="font-bold">${resource.price}</span></p>
+                        <p>Price: <span className="font-bold">&#8377; {resource.price}</span></p>
                         <p>Quantity: <span className="font-bold">{resource.quantity}</span></p>
                     </div>
 

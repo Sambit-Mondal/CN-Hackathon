@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "../../../server/axiosConfig";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ const Login = () => {
         uniqueCode: ""
     });
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
 
     const handleChange = (e) => {
         setFormData({
@@ -41,7 +43,7 @@ const Login = () => {
                         type="email"
                         name="email"
                         placeholder="Email"
-                        className="w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
+                        className="text-white w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
                         value={formData.email}
                         onChange={handleChange}
                         required
@@ -53,7 +55,7 @@ const Login = () => {
                         type="text"
                         name="uniqueCode"
                         placeholder="Unique Code"
-                        className="w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
+                        className="text-white w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
                         value={formData.uniqueCode}
                         onChange={handleChange}
                         required
@@ -61,15 +63,28 @@ const Login = () => {
                 </div>
                 <div className="flex flex-col gap-1">
                     <label className="text-white font-bold">Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        className="w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
+                    <div className="relative">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            name="password"
+                            placeholder="Password"
+                            className="text-white w-full p-2 border-2 border-mlsa-sky-blue bg-transparent rounded-md"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                        {showPassword ? (
+                            <EyeSlashIcon
+                                className="absolute right-2 top-2.5 w-6 h-6 text-white cursor-pointer"
+                                onClick={() => setShowPassword(false)}
+                            />
+                        ) : (
+                            <EyeIcon
+                                className="absolute right-2 top-2.5 w-6 h-6 text-white cursor-pointer"
+                                onClick={() => setShowPassword(true)}
+                            />
+                        )}
+                    </div>
                 </div>
                 <button
                     type="submit"

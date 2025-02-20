@@ -44,10 +44,15 @@ def chat():
 
 @app.route('/inventory', methods=['GET'])
 def get_inventory():
-    """Fetch inventory data from MongoDB and return JSON."""
+    """Fetch inventory data for a specific store."""
     try:
-        inventory_data = list(inventory_collection.find({}, {"_id": 0}))  # Exclude MongoDB _id
+        store_email = request.args.get("storeEmail")
+        if not store_email:
+            return jsonify({"error": "Missing storeEmail parameter"}), 400
+
+        inventory_data = list(inventory_collection.find({"storeEmail": store_email}, {"_id": 0}))  # Exclude MongoDB _id
         return jsonify(inventory_data)
+
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"error": "Internal server error"}), 500
