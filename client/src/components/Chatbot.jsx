@@ -87,7 +87,7 @@ const Chatbot = () => {
                                         className={`p-2 rounded-lg ${msg.role === 'user' ? 'bg-mlsa-sky-blue text-black' : 'border-2 border-mlsa-sky-blue text-white'
                                             }`}
                                     >
-                                        <strong>{msg.role === 'user' ? 'You' : 'ApocaAI'}:</strong> {msg.content}
+                                        <strong>{msg.role === 'user' ? 'You' : 'StockAI'}:</strong> {msg.content}
                                     </div>
                                 </div>
                             ))}
@@ -95,7 +95,7 @@ const Chatbot = () => {
                             {isTyping && (
                                 <div className="flex justify-start text-black">
                                     <div className="p-2 rounded-lg border-2 border-mlsa-sky-blue text-white">
-                                        ApocaAI is typing...
+                                        StockAI is typing...
                                     </div>
                                 </div>
                             )}
