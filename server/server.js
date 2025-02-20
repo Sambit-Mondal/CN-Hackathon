@@ -6,6 +6,7 @@ const { createServer } = require('http'); // Importing http
 const cloudinary = require('cloudinary').v2; // Importing cloudinary
 const authRoutes = require('./routes/auth'); // Import the auth route
 const resourceRoutes = require('./routes/resource'); // Import the resource route
+const purchaseRoutes = require('./routes/purchases'); // Import the purchase route
 
 
 // Configurations
@@ -23,6 +24,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRoutes); // Use the auth route
 app.use('/api/resource', resourceRoutes); // Use the resource route
+app.use('/api/purchase', purchaseRoutes); // Use the purchase route
 
 
 // Cloudinary configuration

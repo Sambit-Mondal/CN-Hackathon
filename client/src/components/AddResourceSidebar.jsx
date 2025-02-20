@@ -13,9 +13,7 @@ const AddResourceSidebar = ({ isOpen, closeSidebar, fetchResources, editableReso
     const [resource, setResource] = useState({
         title: '',
         description: '',
-        tradeType: 'Monetary Trade',
         price: '',
-        inReturn: '',
         quantity: 1,
     });
 
@@ -43,16 +41,13 @@ const AddResourceSidebar = ({ isOpen, closeSidebar, fetchResources, editableReso
             setResource({
                 ...editableResource,
                 price: editableResource.price || '',
-                inReturn: editableResource.inReturn || '',
             });
             setImageUrl(editableResource.img);
         } else {
             setResource({
                 title: '',
                 description: '',
-                tradeType: 'Monetary Trade',
                 price: '',
-                inReturn: '',
                 quantity: 1,
             });
             setImageUrl('');

@@ -2,11 +2,11 @@ import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import AddResourceSidebar from './AddResourceSidebar';
 import ResourceTradingModal from './ResourceTradingModal';
-import { MagnifyingGlassCircleIcon, PencilIcon, PlusCircleIcon, QrCodeIcon } from '@heroicons/react/24/solid';
+import { MagnifyingGlassCircleIcon, PencilIcon, PlusCircleIcon } from '@heroicons/react/24/solid';
 import { AuthContext } from '../contexts/AuthContextFile';
 
 const ResourceTrading = () => {
-    const { user } = useContext(AuthContext);
+    const { store } = useContext(AuthContext);
     const [resources, setResources] = useState([]);
     const [filteredResources, setFilteredResources] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
@@ -114,9 +114,6 @@ const ResourceTrading = () => {
                         <div className="flex flex-col gap-1">
                             <div className="flex justify-center items-center gap-3 text-white">
                                 <div className="font-bold text-lg">{resource.title}</div>
-                                <div className="font-normal text-sm">
-                                    <QrCodeIcon className="size-6 text-mlsa-sky-blue mr-1 cursor-pointer" />
-                                </div>
                             </div>
                             <div className="flex justify-center items-center gap-3 text-white">
                                 <div>
@@ -148,7 +145,7 @@ const ResourceTrading = () => {
             </div>
 
             {isModalOpen && selectedResource && (
-                <ResourceTradingModal resource={selectedResource} user={user} closeModal={closeModal} />
+                <ResourceTradingModal resource={selectedResource} store={store} closeModal={closeModal} />
             )}
 
             <AddResourceSidebar

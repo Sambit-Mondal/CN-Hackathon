@@ -81,10 +81,10 @@ const Navbar = ({ activeView, setActiveView, setQrCode, setIsModalOpen }) => {
             </div>
             <div className='w-full flex flex-col items-center justify-center gap-3'>
                 <div
-                    className={`w-full flex items-center justify-center font-bold rounded-md py-[3px] transition duration-100 ease-in-out cursor-pointer ${activeView === 'real-time-comm' ? 'bg-mlsa-sky-blue text-black' : 'hover:bg-mlsa-sky-blue hover:text-black'}`}
-                    onClick={() => setActiveView('real-time-comm')}
+                    className={`w-full flex items-center justify-center font-bold rounded-md py-[3px] transition duration-100 ease-in-out cursor-pointer ${activeView === 'dashboard' ? 'bg-mlsa-sky-blue text-black' : 'hover:bg-mlsa-sky-blue hover:text-black'}`}
+                    onClick={() => setActiveView('dashboard')}
                 >
-                    Real-time Communication
+                    Dashboard
                 </div>
                 <div
                     className={`w-full flex items-center justify-center font-bold rounded-md py-[3px] transition duration-100 ease-in-out cursor-pointer ${activeView === 'resourceTrading' ? 'bg-mlsa-sky-blue text-black' : 'hover:bg-mlsa-sky-blue hover:text-black'}`}
@@ -93,16 +93,10 @@ const Navbar = ({ activeView, setActiveView, setQrCode, setIsModalOpen }) => {
                     Stock Management
                 </div>
                 <div
-                    className={`w-full flex items-center justify-center font-bold rounded-md py-[3px] transition duration-100 ease-in-out cursor-pointer ${activeView === 'survivalScanner' ? 'bg-mlsa-sky-blue text-black' : 'hover:bg-mlsa-sky-blue hover:text-black'}`}
-                    onClick={() => setActiveView('survivalScanner')}
+                    className={`w-full flex items-center justify-center font-bold rounded-md py-[3px] transition duration-100 ease-in-out cursor-pointer ${activeView === 'purchases' ? 'bg-mlsa-sky-blue text-black' : 'hover:bg-mlsa-sky-blue hover:text-black'}`}
+                    onClick={() => setActiveView('purchases')}
                 >
-                    Survival Scanner
-                </div>
-                <div
-                    className={`w-full flex items-center justify-center font-bold rounded-md py-[3px] transition duration-100 ease-in-out cursor-pointer ${activeView === 'edibilityChecker' ? 'bg-mlsa-sky-blue text-black' : 'hover:bg-mlsa-sky-blue hover:text-black'}`}
-                    onClick={() => setActiveView('edibilityChecker')}
-                >
-                    Edibility Checker
+                    Purchases
                 </div>
             </div>
             <div className='w-full text-[0.7rem] text-center pb-2'>

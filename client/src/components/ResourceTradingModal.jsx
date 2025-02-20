@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { QrCodeIcon, XMarkIcon } from '@heroicons/react/24/solid';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 
 const ResourceTradingModal = ({ resource, closeModal }) => {
     const ref = useRef();
@@ -32,23 +32,32 @@ const ResourceTradingModal = ({ resource, closeModal }) => {
                         className="absolute top-4 right-4 w-8 h-8 cursor-pointer text-mlsa-sky-blue transition hover:scale-110"
                         onClick={closeModal}
                     />
-                    <div className="flex h-[80%] w-[50%] gap-4">
+                    <div className="flex flex-col items-center justify-center h-[80%] w-[50%] gap-4">
                         <img
                             src={resource.img || '/Demo_Image.png'}
                             alt={resource.title}
-                            className="w-full h-full rounded-md border-2 border-mlsa-sky-blue object-cover"
+                            className="w-full h-40 rounded-md border-2 border-mlsa-sky-blue object-cover"
                         />
-                    </div>
-                    <div className='flex flex-col items-start justify-start h-[80%] gap-4 w-[45%]'>
-                        <h2 className="text-xl font-bold mb-2">{resource.title}</h2>
-                        {/* <p className="text-sm italic text-gray-400">ProductID: {resource.}</p> */}
+                        <h2 className="text-xl font-bold">{resource.title}</h2>
+                        <p className="text-sm italic text-gray-400">Product ID: {resource.uniqueCode}</p>
                         <p>Price: <span className="font-bold">${resource.price}</span></p>
                         <p>Quantity: <span className="font-bold">{resource.quantity}</span></p>
                     </div>
+
+                    {/* Display QR Code */}
+                    <div className="flex flex-col items-center justify-center w-[45%]">
+                        <h3 className="text-lg font-semibold">QR Code</h3>
+                        {resource.qrCode ? (
+                            <img
+                                src={`data:image/png;base64;${resource.qrCode}`}
+                                alt="QR Code"
+                                className="w-40 h-40 border-2 border-mlsa-sky-blue rounded-md"
+                            />
+                        ) : (
+                            <p className="text-gray-400">QR Code not available</p>
+                        )}
+                    </div>
                 </div>
-                <button className="bg-mlsa-sky-blue px-4 py-2 rounded-md font-bold text-black w-full flex items-center justify-center">
-                    View QR <QrCodeIcon className="size-5 ml-2" />
-                </button>
             </div>
         </div>
     );
@@ -61,10 +70,9 @@ ResourceTradingModal.propTypes = {
         price: PropTypes.number.isRequired,
         quantity: PropTypes.number.isRequired,
         img: PropTypes.string,
+        uniqueCode: PropTypes.string.isRequired,
         inReturn: PropTypes.string.isRequired,
-    }).isRequired,
-    user: PropTypes.shape({
-        email: PropTypes.string.isRequired,
+        qrCode: PropTypes.string,  // Added QR code prop
     }).isRequired,
     closeModal: PropTypes.func.isRequired,
 };

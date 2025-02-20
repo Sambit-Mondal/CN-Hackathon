@@ -64,6 +64,23 @@ router.get('/all', async (req, res) => {
     }
 });
 
+// Get resource details by unique code
+router.get('/:uniqueCode', async (req, res) => {
+    try {
+        const { uniqueCode } = req.params;
+        const resource = await Resource.findOne({ uniqueCode });
+
+        if (!resource) {
+            return res.status(404).json({ message: "Resource not found" });
+        }
+
+        res.status(200).json(resource);
+    } catch (error) {
+        console.error("Error fetching resource:", error);
+        res.status(500).json({ message: "Server error" });
+    }
+});
+
 // Update a resource
 router.put('/:id', async (req, res) => {
     try {
