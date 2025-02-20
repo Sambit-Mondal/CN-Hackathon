@@ -1,12 +1,20 @@
 # mail_alerts.py
 import smtplib
 from email.mime.text import MIMEText
+from dotenv import load_dotenv
+import os
+
+# Load environment variables
+load_dotenv()
+
+SENDER_EMAIL = os.getenv("EMAIL_USER")
+SENDER_PASSWORD = os.getenv("EMAIL_PASS")
 
 # Gmail SMTP configuration – update these with your details
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 465
-SENDER_EMAIL = "youremail@gmail.com"    # Your Gmail address
-SENDER_PASSWORD = "yourpassword"          # Your Gmail password or app-specific password
+SENDER_EMAIL = SENDER_EMAIL         # Your Gmail address
+SENDER_PASSWORD = SENDER_PASSWORD   # Your Gmail password or app-specific password
 
 def send_email_notification(subject, body, recipient_email):
     """
