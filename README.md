@@ -1,9 +1,9 @@
-# StoreX
+# StockX
 
 
 ## 🚀 About the Project
 
-The **Store Inventory & Purchase Management System** is a full-stack application designed to help store owners efficiently manage their inventory, track purchases, and analyze stock levels. The system integrates **MongoDB, Express, React, and Flask (Python)** to provide a seamless experience.
+**StockX** is a full-stack application designed to help store owners efficiently manage their inventory, track purchases, and analyze stock levels. The system integrates **MongoDB, Express, React, and Flask (Python)** to provide a seamless experience.
 
 ## 🏗️ Features
 
