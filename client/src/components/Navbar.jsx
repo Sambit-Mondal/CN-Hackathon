@@ -58,7 +58,7 @@ const Navbar = ({ activeView, setActiveView, setQrCode, setIsModalOpen }) => {
         <div className="left-0 h-[80%] w-[26%] border-2 border-mlsa-sky-blue rounded-md text-white px-4 flex items-center flex-col justify-between">
             <div className='w-full'>
                 <div className="text-center text-xl font-bold py-4">
-                    Apoc-a-Chill
+                    StockX
                 </div>
                 <hr className="h-1 border-none bg-mlsa-sky-blue mb-4" />
                 <div className="gap-3 flex items-center flex-col justify-center">
