@@ -51,7 +51,7 @@ The **Store Inventory & Purchase Management System** is a full-stack application
 
 ### **1️⃣ Clone the Repository**
 ```sh
- git clone https://github.com/Sambit-Mondal/CN-Hackathon.git
+ git clone https://github.com/Sambit-Mondal/StockX.git
 ```
 
 ### **2️⃣ Install Backend and ML Dependencies**
