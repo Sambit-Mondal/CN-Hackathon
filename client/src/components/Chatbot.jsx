@@ -69,7 +69,7 @@ const Chatbot = () => {
                     className="fixed bottom-5 right-4 lg:right-4 w-[330px] h-[520px] z-[60] bg-mlsa-bg border-2 border-mlsa-sky-blue shadow-lg rounded-lg overflow-hidden"
                 >
                     <div className="bg-blue-theme text-black bg-mlsa-sky-blue font-bold py-2 px-4 flex items-center justify-between">
-                        <p>ApocaAI</p>
+                        <p>StockAI</p>
                         <XMarkIcon
                             className="w-6 h-6 font-bold text-blue-theme p-[2px] bg-background-theme rounded-full cursor-pointer"
                             onClick={() => setIsOpen(false)}
