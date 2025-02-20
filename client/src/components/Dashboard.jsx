@@ -9,7 +9,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,
 const Dashboard = () => {
     const [inventory, setInventory] = useState([]);
     const [lowThreshold, setLowThreshold] = useState(50);
-    const [excessThreshold, setExcessThreshold] = useState(500);
+    const [excessThreshold, setExcessThreshold] = useState(100);
     const storeEmail = localStorage.getItem("storeEmail");
 
     useEffect(() => {
@@ -155,7 +155,7 @@ const Dashboard = () => {
                 {excessStock.length > 0 ? (
                     <ul className="list-disc list-inside">
                         {excessStock.map((item) => (
-                            <li key={item._id} className="text-blue-400">
+                            <li key={item._id} className="text-green-400">
                                 {item.title} - {item.quantity} in stock
                             </li>
                         ))}

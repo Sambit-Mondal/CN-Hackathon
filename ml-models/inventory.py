@@ -14,9 +14,9 @@ client = MongoClient(MONGODB_ATLAS_URI)
 db = client[DB_NAME]  # Use your database name from .env
 collection = db[COLLECTION_NAME]  # Use your collection name from .env
 
-def load_inventory_data(store_email):
-    """Load inventory data for a specific store from MongoDB Atlas."""
-    data = list(collection.find({"storeEmail": store_email}))
+def load_inventory_data():
+    """Load inventory data from MongoDB Atlas and return a DataFrame."""
+    data = list(collection.find())
     if data:
         df = pd.DataFrame(data)
         if '_id' in df.columns:
