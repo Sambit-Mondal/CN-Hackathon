@@ -8,14 +8,16 @@ import pandas as pd
 load_dotenv()
 API_KEY = os.getenv("GROQ_API_KEY")
 MONGODB_URI = os.getenv("MONGODB_URI")
+DB_NAME = os.getenv("DB_NAME")
+COLLECTION_NAME = os.getenv("COLLECTION_NAME")
 
 # Initialize Groq client
 client = Groq(api_key=API_KEY)
 
 # Connect to MongoDB
 mongo_client = pymongo.MongoClient(MONGODB_URI)
-db = mongo_client["your_database_name"]  # Replace with your actual database name
-inventory_collection = db["inventory"]  # Replace with your actual collection name
+db = mongo_client[DB_NAME]  # Replace with your actual database name
+inventory_collection = db[COLLECTION_NAME]  # Replace with your actual collection name
 
 def fetch_inventory_data():
     """Fetch inventory data from MongoDB and return as a Pandas DataFrame."""
