@@ -1,18 +1,29 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./screens/Home";
 import Auth from "./screens/Auth";
-// import SurvivalGuide from "./components/SurvivalGuide";
+import { useContext } from "react";
+import { AuthContext } from "./contexts/AuthContextFile";
+import PropTypes from 'prop-types';
+
+const ProtectedRoute = ({ children }) => {
+  const { store } = useContext(AuthContext);
+  return store ? children : <Navigate to="/auth" replace />;
+};
 
 const App = () => {
   return (
     <Router>
-      {/* <SurvivalGuide /> */}
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Auth />} />
+        <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
       </Routes>
     </Router>
-  )
-}
+  );
+};
+
+ProtectedRoute.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
 
 export default App;
