@@ -72,6 +72,7 @@ ResourceTradingModal.propTypes = {
         quantity: PropTypes.number.isRequired,
         img: PropTypes.string,
         uniqueCode: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
         inReturn: PropTypes.string.isRequired,
         qrCode: PropTypes.string,  // Added QR code prop
     }).isRequired,
