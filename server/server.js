@@ -44,7 +44,7 @@ app.post('/api/cloudinary-signature', (req, res) => {
 
 
 // DB Connection
-const MongoDB_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/CN-Hackathon';
+const MongoDB_URI = process.env.MONGODB_URI;
 mongoose.connect(MongoDB_URI)
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));

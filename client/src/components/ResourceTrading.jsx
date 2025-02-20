@@ -14,6 +14,7 @@ const ResourceTrading = () => {
     const [isModalOpen, setModalOpen] = useState(false);
     const [selectedResource, setSelectedResource] = useState(null);
     const [editableResource, setEditableResource] = useState(null);
+    const storageStoreEmail = localStorage.getItem("storeEmail");
 
     // Fetch all resources from the server
     const fetchResources = async () => {
@@ -37,9 +38,7 @@ const ResourceTrading = () => {
 
         const filtered = resources.filter((resource) =>
             resource.title.toLowerCase().includes(query) ||
-            resource.tradeType.toLowerCase().includes(query) ||
-            resource.inReturn?.toLowerCase().includes(query) ||
-            resource.price?.toString().includes(query)
+            resource.uniqueCode?.toString().includes(query)
         );
 
         setFilteredResources(filtered);
@@ -59,7 +58,7 @@ const ResourceTrading = () => {
 
     // Handle opening the sidebar for editing a resource
     const handleEditResource = (resource) => {
-        if (user?.email && resource.storeEmail && user.email.toLowerCase() === resource.storeEmail.toLowerCase()) {
+        if (storageStoreEmail === resource.storeEmail) {
             setEditableResource(resource);
             setSidebarOpen(true);
         } else {
@@ -82,7 +81,7 @@ const ResourceTrading = () => {
                         <MagnifyingGlassCircleIcon className="h-7 w-7 text-mlsa-sky-blue mr-2" />
                         <input
                             type="text"
-                            placeholder="Search Resource, In-return resource..."
+                            placeholder="Search Resource, Product ID"
                             className="w-full bg-mlsa-bg text-white font-normal text-sm outline-none"
                             value={searchQuery}
                             onChange={handleSearch}
@@ -131,7 +130,7 @@ const ResourceTrading = () => {
                         </div>
 
                         <div className="flex items-center justify-center gap-5">
-                            {user?.email && resource.storeEmail && user.email.toLowerCase() === resource.storeEmail.toLowerCase() && (
+                            {storageStoreEmail === resource.storeEmail && (
                                 <PencilIcon
                                     className="h-10 w-10 p-2 text-mlsa-bg rounded-full bg-mlsa-sky-blue cursor-pointer"
                                     onClick={() => handleEditResource(resource)}
