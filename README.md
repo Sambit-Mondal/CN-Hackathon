@@ -73,7 +73,7 @@
 ### **4️⃣ Set Up Environment Variables**
 Create a `.env` file in both backend and frontend directories:
 
-#### **Backend (.env)**
+#### **Server (.env)**
 ```
 MONGODB_URI = 
 PORT = 
@@ -87,7 +87,7 @@ CLOUDINARY_CLOUD_PRESET =
 CLOUDINARY_CLOUD_NAME = 
 ```
 
-#### **Frontend (.env)**
+#### **Client (.env)**
 ```
 VITE_PUBLIC_BACKEND_URL = 
 VITE_CLOUDINARY_API = 
