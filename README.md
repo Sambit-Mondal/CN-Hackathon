@@ -44,7 +44,7 @@
 ### **Libraries & Dependencies:**
 - `mongoose` (MongoDB ODM for schema modeling)
 - `pandas` (Data processing for analytics)
-- `pyqrcode` (QR Code generation)
+- `qrcode` (QR Code generation)
 - `nodemailer` (Email alerts for inventory)
 
 ## 📜 Installation & Setup
