@@ -21,7 +21,7 @@
 - Filter purchases by `storeEmail`
 
 ### 📊 **Analytics & Dashboard**
-- Visual representation of stock trends & purchase history
+- Visual representation of stock trends & stock analysis
 - Display purchase history filtered by `storeEmail`
 - View **low stock warnings** and **excess stock alerts**
 
@@ -32,7 +32,7 @@
 ## 🏗️ Tech Stack
 
 ### **Frontend:**
-- **Vite.js** (Dynamic UI & purchase system)
+- **Vite.js** (Dynamic UI)
 - **Tailwind CSS** (UI styling)
 - **Axios** (API calls)
 
@@ -64,7 +64,7 @@
 
 ### **3️⃣ Install Frontend and Root Dependencies**
 ```sh
- cd frontend
+ cd client
  npm install
  cd ../
  npm install
